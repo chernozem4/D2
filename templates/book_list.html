@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Book List</title>
+</head>
+<body>
+
+<h1>Список книг</h1>
+
+{% for book in books %}
+    <div>
+        <h2>{{ books.title }}</h2>
+        <p>Автор: {{ books.author }}</p>
+        <p>Жанр: {{ books.get_genre_display }}</p>
+        <p>Цена: ${{ books.price }}</p>
+        <!-- Изображение книги, если оно есть -->
+        {% if book.cover_image %}
+            <img src="{{ book.image.url }}" alt="Cover Image" width="200">
+        {% else %}
+            <p>Обложка отсутствует</p>
+        {% endif %}
+        <!-- Ссылка на страницу с подробной информацией о книге -->
+        <p><a href="{% url 'book_detail' book.id %}">Подробнее</a></p>
+        <hr> <!-- Горизонтальная линия для разделения книг -->
+    </div>
+{% endfor %}
+
+</body>
+</html>
+
+
